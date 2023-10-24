@@ -9,9 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@uniswap/sdk": "^3.0.3",
     "eosjs": "^21.0.2",
     "node-fetch": "^2.6.0",
-    "text-encoding": "^0.7.0"
+    "text-encoding": "^0.7.0",
+    "uniswap": "^0.0.1"
   },
   "devDependencies": {
     "jest": "^29.1.1"

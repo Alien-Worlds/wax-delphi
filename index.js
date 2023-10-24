@@ -9,6 +9,7 @@ const fetch = require("node-fetch");
 const config = require('./config');
 const extract_pairs = require('./extract_pairs');
 const extract_gateio_pair = require("./extract_gateio_pair");
+const uniswap = require('./uniswap');
 
 const rpc = new JsonRpc(config.endpoint, { fetch });
 const signatureProvider = new JsSignatureProvider([config.private_key]);
@@ -98,11 +99,12 @@ const send_quotes = async () => {
 
         //                { "pair": "waxpbtc", "value": 436 }[],
         const quotes = extract_pairs(bittrex, pairs, required_pairs)
+        const waxpeth = await uniswap();
 
-        const waxpeth = await get_gateio_quotes();
         if (waxpeth) {
             quotes.push(waxpeth);
         }
+        // console.log('quotes:', quotes);
         const response = await push_quotes_to_contract(quotes);
 
         console.log(`Pushed transaction ${response.transaction_id}`);
