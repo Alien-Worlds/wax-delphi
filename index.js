@@ -15,7 +15,7 @@ const rpc = new JsonRpc(config.endpoint, { fetch });
 const signatureProvider = new JsSignatureProvider([config.private_key]);
 const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 
-const required_pairs = ['waxpbtc', 'waxpeth', 'waxpusd'];
+const required_pairs = ['waxpbtc', 'waxpeth', 'waxpusd', 'usdtusd', 'usdcusd'];
 
 const get_pairs_from_delphi_contract = async () => {
     try {
@@ -49,7 +49,7 @@ const get_bittrex_quotes = async () => {
 
 
     const wax_markets = json.filter((q) => {
-        return q.symbol.includes('WAXP');
+        return q.symbol.match(/^(USDT)|^(USDC)|^(USD)|^(WAXP)/);
     });
 
     return wax_markets;
@@ -95,7 +95,9 @@ const push_quotes_to_contract = async (push_quotes) => {
 const send_quotes = async () => {
     try {
         const bittrex = await get_bittrex_quotes();
+        // console.log('bittrex:', bittrex);
         const pairs = await get_pairs_from_delphi_contract();
+        // console.log('pairs:', pairs);
 
         //                { "pair": "waxpbtc", "value": 436 }[],
         const quotes = extract_pairs(bittrex, pairs, required_pairs)
