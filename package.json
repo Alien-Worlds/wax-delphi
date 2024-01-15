@@ -4,7 +4,8 @@
   "description": "Supplies WAX/EOS, WAX/USD and WAX/ETH pairs to delphioracle",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",

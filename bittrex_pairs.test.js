@@ -1,4 +1,4 @@
-const extract_bittrex_pairs = require("./extract_pairs");
+const bittrex_pairs = require("./bittrex_pairs");
 
 describe('extract_bittrex_pairs', () => {
     let bittrex;
@@ -198,7 +198,7 @@ describe('extract_bittrex_pairs', () => {
     })
     // Tests that the function extracts required pairs with correct format and precision and returns the expected output with valid input
     it('should extract required pairs with correct format and precision and return expected output', () => {
-        expect(extract_bittrex_pairs(bittrex, pairs, required_pairs)).toStrictEqual([
+        expect(bittrex_pairs.extract_bittrex_pairs(bittrex, pairs, required_pairs)).toStrictEqual([
             { "pair": "usdcusd", "value": 9920 },
             { "pair": "usdtusd", "value": 9998 },
             { "pair": "waxpbtc", "value": 436 },
@@ -213,7 +213,7 @@ describe('extract_bittrex_pairs', () => {
         pairs = {};
         required_pairs = [];
 
-        expect(extract_bittrex_pairs(bittrex, pairs, required_pairs)).toStrictEqual([]);
+        expect(bittrex_pairs.extract_bittrex_pairs(bittrex, pairs, required_pairs)).toStrictEqual([]);
     });
 
     // Tests that the function throws an error when the input types are invalid
@@ -222,14 +222,14 @@ describe('extract_bittrex_pairs', () => {
         pairs = null;
         required_pairs = null;
 
-        expect(() => extract_bittrex_pairs(bittrex, pairs, required_pairs)).toThrow();
+        expect(() => bittrex_pairs.extract_bittrex_pairs(bittrex, pairs, required_pairs)).toThrow();
     });
 
     // Tests that the function returns an empty array when there are missing required pairs
     it('should return an empty array when there are missing required pairs', () => {
         required_pairs = [];
 
-        expect(extract_bittrex_pairs(bittrex, pairs, required_pairs)).toStrictEqual([]);
+        expect(bittrex_pairs.extract_bittrex_pairs(bittrex, pairs, required_pairs)).toStrictEqual([]);
     });
 });
 
