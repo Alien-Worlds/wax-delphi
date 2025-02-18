@@ -1,7 +1,8 @@
 const { ChainId, Fetcher, WETH, Route, Trade, TokenAmount, TradeType } = require('@uniswap/sdk');
 const ethers = require('ethers');
+const config = require('./config');
 
-const url = 'https://mainnet.infura.io/v3/9ae811d1c04243f2869a05848207b985';
+const url = config.eth_endpoint;
 const customHttpProvider = new ethers.providers.JsonRpcProvider(url);
 
 const chainId = ChainId.MAINNET;
